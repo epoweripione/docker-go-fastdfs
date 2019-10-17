@@ -5,7 +5,7 @@ FROM sjqzhang/go-fastdfs:latest
 LABEL Maintainer="Ansley Leung" \
       Description="go-fastdfs with go-fastdfs-web." \
       License="MIT License" \
-      Version="1.3.3"
+      Version="1.3.4"
 
 ENV TZ=Asia/Shanghai
 RUN set -ex && \
@@ -21,7 +21,9 @@ RUN set -ex && \
 
 # go-fastdfs-web
 RUN set -ex && \
-    curl -SL https://github.com/perfree/go-fastdfs-web/releases/download/1.1.2/go-fastdfs-web-1.1.2.zip -o /tmp/go-fastdfs-web.zip && \
+    CHECK_URL="https://api.github.com/repos/perfree/go-fastdfs-web/releases/latest" && \
+    REMOTE_VERSION=$(wget -qO- $CHECK_URL | grep 'tag_name' | cut -d\" -f4 | cut -d'v' -f2) && \
+    curl -SL https://github.com/perfree/go-fastdfs-web/releases/download/v${REMOTE_VERSION}/go-fastdfs-web-${REMOTE_VERSION}.zip -o /tmp/go-fastdfs-web.zip && \
     unzip -q /tmp/go-fastdfs-web.zip -d /opt && \
     rm -rf /tmp/* /var/cache/apk/*
 
