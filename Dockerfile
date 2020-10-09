@@ -5,7 +5,7 @@ FROM sjqzhang/go-fastdfs:latest
 LABEL Maintainer="Ansley Leung" \
       Description="go-fastdfs with go-fastdfs-web." \
       License="MIT License" \
-      Version="1.3.8"
+      Version="1.3.9"
 
 ENV TZ=Asia/Shanghai
 RUN set -ex && \
